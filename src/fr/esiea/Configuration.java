@@ -1,0 +1,119 @@
+package fr.esiea;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import javax.swing.text.Document;
+
+
+// la classe nous permet de config le fonctionnement du log pour tout le projet
+public class Configuration {
+	
+	// level par defaut
+	Level lvl = Level.INFO;
+	AbstractCible cib;
+	ArrayList<AbstractCible> cibles = new ArrayList<AbstractCible>();
+	
+	// on utilise un singleton
+	static Configuration INSTANCE;
+	
+	public Configuration()
+	{
+		
+	}
+	
+	// On cherche si un fichier properties existe et on le lit
+	public void FileProperties()
+	{
+		
+	}
+	
+	public void ReadFile()
+	{
+		System.out.println("ReadFile");
+		String chaine="";
+		String fichier = "D:\\Users\\sobernar\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
+		try{
+			InputStream ips=new FileInputStream(fichier); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			while ((ligne=br.readLine())!=null){
+				chaine = ligne;
+				if (chaine.contains("cible"))
+				{
+					String type = "";
+					String file = "";
+					String delims = " ";
+					String[] tokens = chaine.split(delims);
+					for( String t : tokens)
+					{
+						if(t.contains("type"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							type = tokens2[1];
+						}
+						if(t.contains("filename"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							file = tokens2[1];
+						}
+					}
+					Class cl = Class.forName(type);
+					Object obj = cl.newInstance();
+					AbstractCible as = (AbstractCible)obj;
+					as.setName(chaine);
+					as.setCompl(file);
+					cibles.add(as);
+				}
+			}
+			br.close(); 
+		}		
+		catch (Exception e){
+			System.out.println(e.toString());
+		}
+	
+	}
+	
+	// lvl qu'on va utiliser
+	public void setLevel(Level lvl)
+	{
+		this.lvl = lvl;
+	}
+	
+	public Level getLevel()
+	{
+		return lvl;
+	}
+	
+	public void setLayout()
+	{
+		
+	}
+	
+	public void setCible(AbstractCible cib)
+	{
+		this.cib = cib;
+	}
+	
+	public AbstractCible getCible()
+	{
+		return cib;
+	}
+	
+	public static Configuration getInstance()
+	{
+		System.out.println("inst");
+		if (INSTANCE == null)
+		{
+			INSTANCE = new Configuration();
+		}
+		return INSTANCE;
+	}
+
+}

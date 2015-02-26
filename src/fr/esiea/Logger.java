@@ -1,3 +1,4 @@
+package fr.esiea;
 import java.util.Date;
 
 
@@ -47,6 +48,11 @@ public class Logger {
 		{
 			cfg.getInstance().getCible().WriteMsg(this.toString(msg, Level.ERROR));
 		}
+	}
+	
+	public void warn(String msg)
+	{
+		cfg.getInstance().getCible().WriteMsg(this.toString(msg, Level.WARNING));
 	}
 	
 	public String toString(String msg, Level lvl)
