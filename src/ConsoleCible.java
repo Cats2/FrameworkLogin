@@ -1,7 +1,7 @@
 
-public class FileConsole extends AbstractCible{
+public class ConsoleCible extends AbstractCible{
 
-	public FileConsole()
+	public ConsoleCible()
 	{
 		
 	}
