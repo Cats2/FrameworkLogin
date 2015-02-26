@@ -1,9 +1,5 @@
+<cible name=Console type=fr.esiea.ConsoleCible />
 
 
-<cible name="Log-file" type=fr.esiea.FileCible filename="D:\Users\sobernar\Documents\GitHub\log.txt" />
-<cible name="Console" type=fr.esiea.ConsoleCible />
-<cible name="Log2-File" type=fr.esiea.FileCible filename="D:\Users\sobernar\Documents\GitHub\log2.txt" />
 
-
-<logger name="Class1" level="Info" appendTo="Log-file" />
-<logger name="Class2" level="Debug" appendTo="Log2-File" />
+<logger name=fr.esiea.Main level=INFO appendTo=Console />

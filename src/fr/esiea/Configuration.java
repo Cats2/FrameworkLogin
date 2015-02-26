@@ -23,7 +23,7 @@ public class Configuration {
 	
 	public Configuration()
 	{
-		
+		ReadFile();
 	}
 	
 	// On cherche si un fichier properties existe et on le lit
@@ -36,7 +36,7 @@ public class Configuration {
 	{
 		System.out.println("ReadFile");
 		String chaine="";
-		String fichier = "D:\\Users\\sobernar\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
+		String fichier = "C:\\Users\\cats2\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
 		try{
 			InputStream ips=new FileInputStream(fichier); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
@@ -48,6 +48,7 @@ public class Configuration {
 				{
 					String type = "";
 					String file = "";
+					String name = "";
 					String delims = " ";
 					String[] tokens = chaine.split(delims);
 					for( String t : tokens)
@@ -58,17 +59,23 @@ public class Configuration {
 							String[] tokens2 = t.split(delims2);
 							type = tokens2[1];
 						}
-						if(t.contains("filename"))
+						if(t.contains("path"))
 						{
 							String delims2 = "=";
 							String[] tokens2 = t.split(delims2);
 							file = tokens2[1];
 						}
+						if(t.contains("name"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							name = tokens2[1];
+						}
 					}
 					Class cl = Class.forName(type);
 					Object obj = cl.newInstance();
 					AbstractCible as = (AbstractCible)obj;
-					as.setName(chaine);
+					as.setName(name);
 					as.setCompl(file);
 					cibles.add(as);
 				}
@@ -105,6 +112,7 @@ public class Configuration {
 				}
 			}
 			br.close(); 
+			System.out.println("fichier lu");
 		}		
 		catch (Exception e){
 			System.out.println(e.toString());
@@ -113,11 +121,11 @@ public class Configuration {
 	}
 	
 	// ex param : Boitier.class.getName()
-	public Logger getLogger(String name)
+	public Logger getLogger(Class cl)
 	{
 		for(Logger l : loggers)
 		{
-			if(l.getName() == name)
+			if(l.getName() == cl.getName())
 			{
 				return l;
 			}
@@ -151,9 +159,17 @@ public class Configuration {
 		this.cib = cib;
 	}
 	
-	public AbstractCible getCible()
+	public AbstractCible getCible(Logger l)
 	{
-		return cib;
+		for( AbstractCible c : cibles)
+		{
+			System.out.println(c.getName());
+			if(c.getName().equals(l.getAppendTo()))
+			{
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	public static Configuration getInstance()

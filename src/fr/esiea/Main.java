@@ -6,8 +6,7 @@ public class Main {
 
 	public static void main(String [ ] args)
 	{
-		Configuration cfg = null;
-		cfg = Configuration.getInstance();
-		cfg.ReadFile();
+		Logger log = Configuration.getInstance().getLogger(Main.class);
+		log.error("Why not");
 	}
 }
