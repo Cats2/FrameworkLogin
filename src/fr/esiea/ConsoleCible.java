@@ -20,10 +20,4 @@ public class ConsoleCible extends AbstractCible{
 		System.out.println(msg);
 	}
 
-
-	@Override
-	public void ReadCibleproperties() {
-		// TODO Auto-generated method stub
-		
-	}
 }
