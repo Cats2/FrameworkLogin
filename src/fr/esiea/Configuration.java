@@ -23,7 +23,12 @@ public class Configuration {
 	
 	public Configuration()
 	{
-		ReadFile();
+		File f = new File("C:\\Users\\cats2\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt");
+		if(f.exists())
+		{
+			ReadFile();
+		}
+		
 	}
 	
 	// On cherche si un fichier properties existe et on le lit
@@ -37,6 +42,7 @@ public class Configuration {
 		System.out.println("ReadFile");
 		String chaine="";
 		String fichier = "C:\\Users\\cats2\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
+		
 		try{
 			InputStream ips=new FileInputStream(fichier); 
 			InputStreamReader ipsr=new InputStreamReader(ips);
@@ -180,6 +186,22 @@ public class Configuration {
 			INSTANCE = new Configuration();
 		}
 		return INSTANCE;
+	}
+	
+	public void addLogger(Class cl, String name, String level, String appentTo)
+	{
+		Logger l = new Logger(cl, name, level, appentTo);
+		loggers.add(l);
+	}
+	
+	public void addCible(String name, String type, String path) throws ClassNotFoundException, InstantiationException, IllegalAccessException
+	{
+		Class cl = Class.forName(type);
+		Object obj = cl.newInstance();
+		AbstractCible as = (AbstractCible)obj;
+		as.setName(name);
+		as.setCompl(path);
+		cibles.add(as);
 	}
 
 }
