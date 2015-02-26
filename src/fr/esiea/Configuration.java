@@ -16,6 +16,7 @@ public class Configuration {
 	Level lvl = Level.INFO;
 	AbstractCible cib;
 	ArrayList<AbstractCible> cibles = new ArrayList<AbstractCible>();
+	ArrayList<Logger> loggers = new ArrayList<Logger>();
 	
 	// on utilise un singleton
 	static Configuration INSTANCE;
@@ -71,6 +72,37 @@ public class Configuration {
 					as.setCompl(file);
 					cibles.add(as);
 				}
+				if (chaine.contains("logger"))
+				{
+					String level = "";
+					String appendTo = "";
+					String name = "";
+					String delims = " ";
+					String[] tokens = chaine.split(delims);
+					for( String t : tokens)
+					{
+						if(t.contains("name"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							name = tokens2[1];
+						}
+						else if(t.contains("level"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							level = tokens2[1];
+						}
+						else if(t.contains("appendTo"))
+						{
+							String delims2 = "=";
+							String[] tokens2 = t.split(delims2);
+							appendTo = tokens2[1];
+						}
+					}
+					Class cl = Class.forName(name);
+					loggers.add(new Logger(cl, level, appendTo));
+				}
 			}
 			br.close(); 
 		}		
@@ -78,6 +110,24 @@ public class Configuration {
 			System.out.println(e.toString());
 		}
 	
+	}
+	
+	// ex param : Boitier.class.getName()
+	public Logger getLogger(String name)
+	{
+		for(Logger l : loggers)
+		{
+			if(l.getName() == name)
+			{
+				return l;
+			}
+		}
+		return null;
+	}
+	
+	public void WriteLog()
+	{
+		
 	}
 	
 	// lvl qu'on va utiliser

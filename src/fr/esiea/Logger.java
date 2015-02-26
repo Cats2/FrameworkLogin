@@ -14,16 +14,22 @@ enum Level { DEBUG("DEBUG"), INFO("INFO"), ERROR("ERROR"), WARNING("WARNING");
 	{
 		return lvl;
 	}
+	
+
 };
 
 public class Logger {
 
 	Class cl;
 	Configuration cfg;
+	String lvl;
+	String appendTo;
 	
-	public Logger(Class cl)
+	public Logger(Class cl, String lvl, String appendTo)
 	{
 		this.cl = cl;
+		this.lvl = lvl;
+		this.appendTo = appendTo;
 	}
 	
 	public void info(String msg)
@@ -39,6 +45,7 @@ public class Logger {
 		if(cfg.getLevel().ordinal() >= Level.DEBUG.ordinal())
 		{
 			cfg.getInstance().getCible().WriteMsg(this.toString(msg, Level.DEBUG));
+			
 		}
 	}
 	
@@ -59,6 +66,11 @@ public class Logger {
 	{
 		Date now = new Date(); 
 		return now.toString() + " " + "[NAME = ? LEVEL=" + lvl.toString() + " MESSAGE=" + msg + "]";
+	}
+	
+	public String getName()
+	{
+		return cl.getName();
 	}
 	
 }
