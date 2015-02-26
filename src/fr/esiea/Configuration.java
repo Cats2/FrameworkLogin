@@ -108,7 +108,7 @@ public class Configuration {
 						}
 					}
 					Class cl = Class.forName(name);
-					loggers.add(new Logger(cl, level, appendTo));
+					loggers.add(new Logger(cl, name, level, appendTo));
 				}
 			}
 			br.close(); 

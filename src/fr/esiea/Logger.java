@@ -29,6 +29,7 @@ public class Logger {
 	Level l = Level.INFO;
 	Configuration cfg;
 	String lvl;
+	String name;
 	String appendTo;
 	
 	public Logger(Class cl)
@@ -36,10 +37,11 @@ public class Logger {
 		this.cl = cl;
 	}
 	
-	public Logger(Class cl, String lvl, String appendTo)
+	public Logger(Class cl, String name, String lvl, String appendTo)
 	{
 		this.cl = cl;
 		this.lvl = lvl;
+		this.name = name;
 		this.appendTo = appendTo;
 	}
 	
@@ -73,7 +75,7 @@ public class Logger {
 	public String toString(String msg, Level lvl)
 	{
 		Date now = new Date(); 
-		return now.toString() + " " + "[NAME = ? LEVEL=" + lvl.toString() + " MESSAGE=" + msg + "]";
+		return now.toString() + " " + "[NAME=" + name + " LEVEL=" + lvl.toString() + " MESSAGE=" + msg + "]";
 	}
 	
 	public String getName()
