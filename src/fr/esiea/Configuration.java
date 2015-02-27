@@ -23,7 +23,7 @@ public class Configuration {
 	
 	public Configuration()
 	{
-		File f = new File("C:\\Users\\cats2\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt");
+		File f = new File("D:\\Users\\sobernar\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt");
 		if(f.exists())
 		{
 			ReadFile();
@@ -41,7 +41,7 @@ public class Configuration {
 	{
 		System.out.println("ReadFile");
 		String chaine="";
-		String fichier = "C:\\Users\\cats2\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
+		String fichier = "D:\\Users\\sobernar\\Documents\\GitHub\\FrameworkLogin\\src\\properties.txt" ;
 		
 		try{
 			InputStream ips=new FileInputStream(fichier); 
@@ -90,6 +90,7 @@ public class Configuration {
 					String level = "";
 					String appendTo = "";
 					String name = "";
+					String format = "";
 					String delims = " ";
 					String[] tokens = chaine.split(delims);
 					for( String t : tokens)
@@ -113,8 +114,11 @@ public class Configuration {
 							appendTo = tokens2[1];
 						}
 					}
+					String delims2 = "\"";
+				    String[] tokens2 = chaine.split(delims2);
+					format = tokens2[1];
 					Class cl = Class.forName(name);
-					loggers.add(new Logger(cl, name, level, appendTo));
+					loggers.add(new Logger(cl, name, level, appendTo ,new Formatter(format)));
 				}
 			}
 			br.close(); 
@@ -188,9 +192,9 @@ public class Configuration {
 		return INSTANCE;
 	}
 	
-	public void addLogger(Class cl, String name, String level, String appentTo)
+	public void addLogger(Class cl, String name, String level, String appentTo, Formatter form)
 	{
-		Logger l = new Logger(cl, name, level, appentTo);
+		Logger l = new Logger(cl, name, level, appentTo, form);
 		loggers.add(l);
 	}
 	

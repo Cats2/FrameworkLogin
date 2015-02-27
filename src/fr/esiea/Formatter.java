@@ -1,9 +1,21 @@
 package fr.esiea;
 
-public class Formatter {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-	public Formatter()
+public class Formatter {
+	
+	String formatDate;
+
+	public Formatter(String formatDate)
 	{
-		
+		this.formatDate = formatDate;
+	}
+	
+	public String toString()
+	{
+		Date now = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat(formatDate);
+		return dateFormatter.format(now);
 	}
 }

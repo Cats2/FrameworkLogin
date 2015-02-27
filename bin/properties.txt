@@ -1,5 +1,4 @@
 <cible name=Console type=fr.esiea.ConsoleCible />
 <cible name=File type=fr.esiea.FileCible path=""/>
 
-
-<logger name=fr.esiea.Main level=INFO appendTo=Console />
+<logger name=fr.esiea.Main level=INFO appendTo=Console format="EEEE d MMMM yyyy HH:mm:ss" />

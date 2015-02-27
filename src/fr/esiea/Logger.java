@@ -31,18 +31,20 @@ public class Logger {
 	String lvl;
 	String name;
 	String appendTo;
+	Formatter form;
 	
 	public Logger(Class cl)
 	{
 		this.cl = cl;
 	}
 	
-	public Logger(Class cl, String name, String lvl, String appendTo)
+	public Logger(Class cl, String name, String lvl, String appendTo, Formatter form)
 	{
 		this.cl = cl;
 		this.lvl = lvl;
 		this.name = name;
 		this.appendTo = appendTo;
+		this.form = form;
 	}
 	
 	public void info(String msg)
@@ -73,9 +75,8 @@ public class Logger {
 	}
 	
 	public String toString(String msg, Level lvl)
-	{
-		Date now = new Date(); 
-		return now.toString() + " " + "[NAME=" + name + " LEVEL=" + lvl.toString() + " MESSAGE=" + msg + "]";
+	{ 
+		return form.toString() + " " + "[NAME=" + name + " LEVEL=" + lvl.toString() + " MESSAGE=" + msg + "]";
 	}
 	
 	public String getName()
