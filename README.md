@@ -30,7 +30,7 @@ On marque la balise logger pour définir au framework qu'on déclare un nouveau 
 	•	name : c'est la fonction auquel est rattaché le log
 	•	level : le niveau souhaité pour ce log ( 3 niveaux possibles : INFO, DEBUG, ERROR)
 	•	appendTo: la cible qu'on souhaite utilisé pour ce log.
-	•       format : on déclare un nouveau Formatter() qui nous permet d'écrire la date dans le format que l'on souhaite
+	• format : on déclare un nouveau Formatter() qui nous permet d'écrire la date dans le format que l'on souhaite
 
 
 On peut définir autant de log qu'on souhaite et autant de cible, les logs peuvent être ainsi rattaché à différentes cibles.
