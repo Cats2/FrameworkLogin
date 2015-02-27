@@ -2,8 +2,11 @@ package fr.esiea;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 
 public class FileCible extends AbstractCible{
@@ -29,21 +32,16 @@ public class FileCible extends AbstractCible{
 	
 	public void write(String msg)
 	{
-		try { //ouvrir le fichier ou le creer
-			 
-			  File file = new File(path);
-			  boolean success = file.createNewFile();
-			 }
-			 catch (IOException e){}
-			 
-			 try{//ecrire une ligne dans le fichier
-			 
-			 BufferedWriter outfile = new BufferedWriter(new FileWriter(path));
-			 outfile.write(msg);
-			 outfile.close();
-			 }
-			 catch (IOException e){}
-	}
-
-
+		try {
+            //Whatever the file path is.
+            File filename = new File(path);
+            FileOutputStream fileoutputstream = new FileOutputStream(filename);
+            OutputStreamWriter ouputstreamwriter = new OutputStreamWriter(fileoutputstream);    
+            Writer w = new BufferedWriter(ouputstreamwriter);
+            w.write("");
+            w.close();
+        } catch (IOException e) {
+            System.err.println("On ne peux pas écrire dans ce fichier");
+        }
+    }
 }
