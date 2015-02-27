@@ -38,7 +38,7 @@ public class FileCible extends AbstractCible{
             FileOutputStream fileoutputstream = new FileOutputStream(filename);
             OutputStreamWriter ouputstreamwriter = new OutputStreamWriter(fileoutputstream);    
             Writer w = new BufferedWriter(ouputstreamwriter);
-            w.write("");
+            w.write(msg);
             w.close();
         } catch (IOException e) {
             System.err.println("On ne peux pas écrire dans ce fichier");
